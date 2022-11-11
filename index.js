@@ -5,29 +5,35 @@ function main() {
     sleep(4000);
 
     while (true) {
-        var goblin = findGoblin();
+        var cow = findCow();
 
-        if (goblin === false) {
-            console.log("Could not find goblin");
-            break;
+        if (cow === false) {
+            console.log("Could not find cow");
+        } else {
+            robot.moveMouse(cow.x, cow.y);
+            robot.mouseClick();
+            sleep(20000);
         }
 
-        robot.moveMouse(goblin.x, goblin.y);
-        robot.mouseClick();
-
-        sleep(30000);
     }
 
-    console.log("done.");
+    //console.log("done.");
 }
 
 function findGoblin() {
-    var x = 300, y = 300, width = 1300, height = 500;
+    var x = 0, y = 0, width = 1920, height = 1080;
     var img = robot.screen.capture(x, y, width, height);
 
-    var goblin_colors = ["574e40", "595042", "635949", "736855", "605747", "5e5545", "5c5244", "655b4b", "736855"];
+    var goblin_colors = [
+        "8a6116",
+        "875f16",
+        "ae7b1b", 
+        "725211", 
+        "916617", 
+        "9b6e19"
+    ]
 
-    for (var i = 0; i < 2000; i++) {
+    for (var i = 0; i < 100; i++) {
         var random_x = getRandomInt(0, width - 1);
         var random_y = getRandomInt(0, height - 1);
         var sample_color = img.colorAt(random_x, random_y);
@@ -42,6 +48,68 @@ function findGoblin() {
     }
 
     return false;
+}
+
+function findChicken() {
+    var x = 300, y = 300, width = 1300, height = 300;
+    var img = robot.screen.capture(x, y, width, height);
+
+    var chicken_colors = [
+        "b19769",
+        "a1885f",
+        "6a5a3f",
+        "b79c6e"
+    ]
+
+    for (var i = 0; i < 1000; i++) {
+        var random_x = getRandomInt(0, width - 1);
+        var random_y = getRandomInt(0, height - 1);
+        var sample_color = img.colorAt(random_x, random_y);
+
+        if (chicken_colors.includes(sample_color)) {
+            var screen_x = random_x + x;
+            var screen_y = random_y + y;
+
+            console.log("Found chicken at:" + screen_x + ", " + screen_y + " color " + sample_color);
+            return { x: screen_x, y: screen_y };
+        }
+    }
+
+    return false;
+}
+
+function findCow() {
+    var x = 300, y = 300, width = 1300, height = 400;
+    var img = robot.screen.capture(x, y, width, height);
+    
+    var cow_colors = [
+        "4d3f39",
+        "261c17",
+        "4f413a",
+        "3f2e26",
+        "392a22",
+        "201a0b"
+    ]
+
+    for (var i = 0; i < 2500; i++) {
+        var random_x = getRandomInt(0, width - 1);
+        var random_y = getRandomInt(0, height - 1);
+        var sample_color = img.colorAt(random_x, random_y);
+
+        if (cow_colors.includes(sample_color)) {
+            var screen_x = random_x + x;
+            var screen_y = random_y + y;
+
+            console.log("Found cow at:" + screen_x + ", " + screen_y + " color " + sample_color);
+            return { x: screen_x, y: screen_y };
+        }
+    }
+
+    return false;
+}
+
+function farmCrabs() {
+    sleep(600000);
 }
 
 function getRandomInt(min, max) {
