@@ -111,7 +111,7 @@ function findCow() {
             var screen_x = random_x + x;
             var screen_y = random_y + y;
 
-            console.log("Found cow at:" + screen_x + ", " + screen_y + " color " + sample_color);
+            console.log("Found cow at: " + screen_x + ", " + screen_y + " with the color " + sample_color);
             return { x: screen_x, y: screen_y };
         }
     }
