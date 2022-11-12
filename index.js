@@ -1,6 +1,10 @@
 var robot = require('robotjs');
 
 function main() {
+
+    var cowsFarmed = 0;
+    var couldNotFindCow = 0;
+
     console.log("starting");
     sleep(4000);
 
@@ -8,10 +12,11 @@ function main() {
         var cow = findCow();
 
         if (cow === false) {
-            console.log("Could not find cow");
+            console.log("I have missed " + ++couldNotFindCow + " cows");
         } else {
             robot.moveMouse(cow.x, cow.y);
             robot.mouseClick();
+            console.log(++cowsFarmed + " cows have fell to my wrath");
             sleep(20000);
         }
 
@@ -83,12 +88,18 @@ function findCow() {
     var img = robot.screen.capture(x, y, width, height);
     
     var cow_colors = [
-        "4d3f39",
-        "261c17",
-        "4f413a",
-        "3f2e26",
-        "392a22",
-        "201a0b"
+        "736155",
+        "5d5045",
+        "756356",
+        "6f5643",
+        "755a45",
+        "463121",
+        "3c2b23",
+        "382921",
+        "311d17",
+        "4b362b",
+        "4f4039",
+        "291d17"
     ]
 
     for (var i = 0; i < 2500; i++) {
