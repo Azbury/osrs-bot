@@ -7,22 +7,22 @@ function main() {
 
     console.log("starting");
     sleep(4000);
+    treeGnomeStrongholdAgilityTraining();
+    // while (true) {
+    //     var cow = findSquare();
 
-    while (true) {
-        var cow = findCow();
+    //     if (cow === false) {
+    //         console.log("I have missed " + ++couldNotFindCow + " cows");
+    //     } else {
+    //         robot.moveMouse(cow.x, cow.y);
+    //         robot.mouseClick();
+    //         console.log(++cowsFarmed + " cows have fell to my wrath");
+    //         sleep(8000);
+    //     }
 
-        if (cow === false) {
-            console.log("I have missed " + ++couldNotFindCow + " cows");
-        } else {
-            robot.moveMouse(cow.x, cow.y);
-            robot.mouseClick();
-            console.log(++cowsFarmed + " cows have fell to my wrath");
-            sleep(16000);
-        }
+    // }
 
-    }
-
-    //console.log("done.");
+    console.log("done.");
 }
 
 function findGoblin() {
@@ -105,6 +105,81 @@ function findCow() {
     }
 
     return false;
+}
+
+function findSquare() {
+    var x = 300, y = 300, width = 1300, height = 400;
+    var img = robot.screen.capture(x, y, width, height);
+    
+    var cow_colors = [
+        "000000"
+    ]
+
+    for (var i = 0; i < 100; i++) {
+        var random_x = getRandomInt(0, width - 1);
+        var random_y = getRandomInt(0, height - 1);
+        var sample_color = img.colorAt(random_x, random_y);
+        if (cow_colors.includes(sample_color)) {
+            var screen_x = random_x + x;
+            var screen_y = random_y + y;
+
+            console.log("Found cow at: " + screen_x + ", " + screen_y + " with the color " + sample_color);
+            return { x: screen_x, y: screen_y };
+        }
+    }
+
+    return false;
+}
+
+function treeGnomeStrongholdAgilityTraining() {
+    
+    var sleepTime = 6000;
+
+    // log
+    robot.moveMouse(939, 483);
+    robot.mouseClick();
+
+    sleep(sleepTime);
+
+    // cargo net box
+    robot.moveMouse(955,401);
+    robot.mouseClick();
+
+    sleep(sleepTime);
+
+    // pole
+    robot.moveMouse(945,487);
+    robot.mouseClick();
+
+    sleep(sleepTime);
+
+    // rope bridge
+    robot.moveMouse(787,529);
+    robot.mouseClick();
+
+    sleep(7000);
+
+    // down the tree
+    robot.moveMouse(850,490);
+    robot.mouseClick();
+
+    sleep(sleepTime);
+
+    // over cargo net
+    robot.moveMouse(977,735);
+    robot.mouseClick();
+
+    sleep(sleepTime);
+
+    // pipe
+    robot.moveMouse(982,628);
+    robot.mouseClick();
+
+    sleep(9000);
+
+    // back to the start
+    robot.moveMouse(1247,475);
+    robot.mouseClick();
 }
 
 function farmCrabs() {
