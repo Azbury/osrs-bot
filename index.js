@@ -17,7 +17,7 @@ function main() {
             robot.moveMouse(cow.x, cow.y);
             robot.mouseClick();
             console.log(++cowsFarmed + " cows have fell to my wrath");
-            sleep(8000);
+            sleep(14000);
         }
 
     }
@@ -88,7 +88,7 @@ function findCow() {
     var img = robot.screen.capture(x, y, width, height);
     
     var cow_colors = [
-        "0b7383"
+        "ff0000"
     ]
 
     for (var i = 0; i < 100; i++) {
