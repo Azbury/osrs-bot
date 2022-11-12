@@ -17,7 +17,7 @@ function main() {
             robot.moveMouse(cow.x, cow.y);
             robot.mouseClick();
             console.log(++cowsFarmed + " cows have fell to my wrath");
-            sleep(20000);
+            sleep(16000);
         }
 
     }
@@ -88,25 +88,13 @@ function findCow() {
     var img = robot.screen.capture(x, y, width, height);
     
     var cow_colors = [
-        "736155",
-        "5d5045",
-        "756356",
-        "6f5643",
-        "755a45",
-        "463121",
-        "3c2b23",
-        "382921",
-        "311d17",
-        "4b362b",
-        "4f4039",
-        "291d17"
+        "0b7383"
     ]
 
-    for (var i = 0; i < 2500; i++) {
+    for (var i = 0; i < 100; i++) {
         var random_x = getRandomInt(0, width - 1);
         var random_y = getRandomInt(0, height - 1);
         var sample_color = img.colorAt(random_x, random_y);
-
         if (cow_colors.includes(sample_color)) {
             var screen_x = random_x + x;
             var screen_y = random_y + y;
