@@ -1,0 +1,1 @@
+This is a Old School Runescape bot used to farm cows and run agility courses.
