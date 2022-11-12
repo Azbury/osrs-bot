@@ -7,20 +7,20 @@ function main() {
 
     console.log("starting");
     sleep(4000);
-    treeGnomeStrongholdAgilityTraining();
-    // while (true) {
-    //     var cow = findSquare();
+    //draynorVillageAgilityTraining();
+    while (true) {
+        var cow = findCow();
 
-    //     if (cow === false) {
-    //         console.log("I have missed " + ++couldNotFindCow + " cows");
-    //     } else {
-    //         robot.moveMouse(cow.x, cow.y);
-    //         robot.mouseClick();
-    //         console.log(++cowsFarmed + " cows have fell to my wrath");
-    //         sleep(8000);
-    //     }
+        if (cow === false) {
+            console.log("I have missed " + ++couldNotFindCow + " cows");
+        } else {
+            robot.moveMouse(cow.x, cow.y);
+            robot.mouseClick();
+            console.log(++cowsFarmed + " cows have fell to my wrath");
+            sleep(8000);
+        }
 
-    // }
+    }
 
     console.log("done.");
 }
@@ -108,14 +108,17 @@ function findCow() {
 }
 
 function findSquare() {
-    var x = 300, y = 300, width = 1300, height = 400;
+
+    // ADD ABILITY TO FIND MARKS OF GRACE
+
+    var x = 100, y = 100, width = 1300, height = 800;
     var img = robot.screen.capture(x, y, width, height);
     
     var cow_colors = [
-        "000000"
+        "ff0000"
     ]
 
-    for (var i = 0; i < 100; i++) {
+    for (var i = 0; i < 10000; i++) {
         var random_x = getRandomInt(0, width - 1);
         var random_y = getRandomInt(0, height - 1);
         var sample_color = img.colorAt(random_x, random_y);
@@ -179,6 +182,13 @@ function treeGnomeStrongholdAgilityTraining() {
 
     // back to the start
     robot.moveMouse(1247,475);
+    robot.mouseClick();
+}
+
+function draynorVillageAgilityTraining() {
+    var sleepTime = 6000;
+
+    robot.moveMouse(875,515);
     robot.mouseClick();
 }
 
