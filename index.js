@@ -2,104 +2,42 @@ var robot = require('robotjs');
 
 function main() {
 
-    var cowsFarmed = 0;
-    var couldNotFindCow = 0;
+    var mobsFarmed = 0;
+    var couldNotFindMob = 0;
 
     console.log("starting");
     sleep(4000);
-    //draynorVillageAgilityTraining();
+
     while (true) {
-        var cow = findCow();
+        var mob = findMob();
 
-        if (cow === false) {
-            console.log("I have missed " + ++couldNotFindCow + " cows");
+        if (mob === false) {
+            console.log("I have missed " + ++couldNotFindMob + " mobs");
         } else {
-            robot.moveMouse(cow.x, cow.y);
+            robot.moveMouse(mob.x, mob.y);
             robot.mouseClick();
-            console.log(++cowsFarmed + " cows have fell to my wrath");
-            sleep(14000);
+            console.log(++mobsFarmed + " mobs have fell to my wrath");
+            sleep(13000);
         }
 
     }
-
-    console.log("done.");
 }
 
-function findGoblin() {
-    var x = 0, y = 0, width = 1920, height = 1080;
-    var img = robot.screen.capture(x, y, width, height);
-
-    var goblin_colors = [
-        "8a6116",
-        "875f16",
-        "ae7b1b", 
-        "725211", 
-        "916617", 
-        "9b6e19"
-    ]
-
-    for (var i = 0; i < 100; i++) {
-        var random_x = getRandomInt(0, width - 1);
-        var random_y = getRandomInt(0, height - 1);
-        var sample_color = img.colorAt(random_x, random_y);
-
-        if (goblin_colors.includes(sample_color)) {
-            var screen_x = random_x + x;
-            var screen_y = random_y + y;
-
-            console.log("Found goblin at:" + screen_x + ", " + screen_y + " color " + sample_color);
-            return { x: screen_x, y: screen_y };
-        }
-    }
-
-    return false;
-}
-
-function findChicken() {
-    var x = 300, y = 300, width = 1300, height = 300;
-    var img = robot.screen.capture(x, y, width, height);
-
-    var chicken_colors = [
-        "b19769",
-        "a1885f",
-        "6a5a3f",
-        "b79c6e"
-    ]
-
-    for (var i = 0; i < 1000; i++) {
-        var random_x = getRandomInt(0, width - 1);
-        var random_y = getRandomInt(0, height - 1);
-        var sample_color = img.colorAt(random_x, random_y);
-
-        if (chicken_colors.includes(sample_color)) {
-            var screen_x = random_x + x;
-            var screen_y = random_y + y;
-
-            console.log("Found chicken at:" + screen_x + ", " + screen_y + " color " + sample_color);
-            return { x: screen_x, y: screen_y };
-        }
-    }
-
-    return false;
-}
-
-function findCow() {
+function findMob() {
     var x = 300, y = 300, width = 1300, height = 400;
     var img = robot.screen.capture(x, y, width, height);
     
-    var cow_colors = [
-        "ff0000"
-    ]
+    var mob_color = "ff0000";
 
     for (var i = 0; i < 100; i++) {
         var random_x = getRandomInt(0, width - 1);
         var random_y = getRandomInt(0, height - 1);
         var sample_color = img.colorAt(random_x, random_y);
-        if (cow_colors.includes(sample_color)) {
+        if (mob_color === sample_color) {
             var screen_x = random_x + x;
             var screen_y = random_y + y;
 
-            console.log("Found cow at: " + screen_x + ", " + screen_y + " with the color " + sample_color);
+            console.log("Found mob at: " + screen_x + ", " + screen_y);
             return { x: screen_x, y: screen_y };
         }
     }
