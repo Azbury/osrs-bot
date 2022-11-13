@@ -1,14 +1,19 @@
 var robot = require('robotjs');
 
 function main() {
+    const agilitySleepDelay = 9000;
+    const runMobSleepDelay = 12000;
+    const walkMobSleepDelay = 13000;
+
+    const objectsFoundBeforeRunToggle = 100;
+
+    const toggleRunButtonX = 1723;
+    const toggleRunButtonY = 154;
+
     let couldNotFindObject = 0;
     let marksFound = 0;
     let objectsFound = 0;
-    const objectsFoundBeforeRunToggle = 150;
-    const toggleRunButtonX = 1723;
-    const toggleRunButtonY = 154;
-    const agilitySleepDelay = 9000;
-    const mobSleepDelay = 12000;
+    let running = true;
 
     console.log("starting");
     sleep(4000);
@@ -28,10 +33,15 @@ function main() {
             }
             // toggle run
             if (objectsFound % objectsFoundBeforeRunToggle === 0) {
+                running = !running;
                 robot.moveMouseSmooth(toggleRunButtonX, toggleRunButtonY);
                 robot.mouseClick();
             }
-            sleep(mobSleepDelay);
+            if (running) {
+                sleep(runMobSleepDelay);
+            } else {
+                sleep(walkMobSleepDelay)
+            }
         }
 
     }
