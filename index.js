@@ -1,10 +1,12 @@
 var robot = require('robotjs');
 
 function main() {
+    var couldNotFindMob = 0;
+    var mobsFarmed = 0;
+    var mobsFarmedBeforeRunToggle = 50;
     var toggleRunButtonX = 1723;
     var toggleRunButtonY = 154;
-    var mobsFarmed = 0;
-    var couldNotFindMob = 0;
+
 
     console.log("starting");
     sleep(4000);
@@ -19,7 +21,7 @@ function main() {
             robot.mouseClick();
             console.log(++mobsFarmed + " mobs have fell to my wrath");
             // toggle run
-            if (mobsFarmed % 10 === 0) {
+            if (mobsFarmed % mobsFarmedBeforeRunToggle === 0) {
                 robot.moveMouseSmooth(toggleRunButtonX, toggleRunButtonY);
                 robot.mouseClick();
             }
