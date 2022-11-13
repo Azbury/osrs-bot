@@ -3,7 +3,7 @@ var robot = require('robotjs');
 function main() {
     var couldNotFindMob = 0;
     var mobsFarmed = 0;
-    var mobsFarmedBeforeRunToggle = 50;
+    var mobsFarmedBeforeRunToggle = 200;
     var toggleRunButtonX = 1723;
     var toggleRunButtonY = 154;
 
@@ -12,7 +12,7 @@ function main() {
     sleep(4000);
 
     while (true) {
-        var mob = findMob();
+        var mob = findSquare();
 
         if (mob === false) {
             console.log("I have missed " + ++couldNotFindMob + " mobs");
@@ -25,7 +25,7 @@ function main() {
                 robot.moveMouseSmooth(toggleRunButtonX, toggleRunButtonY);
                 robot.mouseClick();
             }
-            sleep(13000);
+            sleep(10000);
         }
 
     }
@@ -57,22 +57,39 @@ function findSquare() {
 
     // ADD ABILITY TO FIND MARKS OF GRACE
 
-    var x = 100, y = 100, width = 1300, height = 800;
-    var img = robot.screen.capture(x, y, width, height);
+    var mark_x = 300, mark_y = 300, mark_width = 1300, mark_height = 400
+
+    var obstacle_x = 100, obstacle_y = 100, obstacle_width = 1300, obstacle_height = 800;
     
-    var cow_colors = [
-        "ff0000"
-    ]
+    var agility_obstacle = "ff0000";
+    var mark_of_grace_colors = ["00ff00", "00cd00"];
+
+    var img = robot.screen.capture(obstacle_x, obstacle_y, obstacle_width, obstacle_height);
 
     for (var i = 0; i < 10000; i++) {
-        var random_x = getRandomInt(0, width - 1);
-        var random_y = getRandomInt(0, height - 1);
+        var random_x = getRandomInt(0, obstacle_width - 1);
+        var random_y = getRandomInt(0, obstacle_height - 1);
         var sample_color = img.colorAt(random_x, random_y);
-        if (cow_colors.includes(sample_color)) {
-            var screen_x = random_x + x;
-            var screen_y = random_y + y;
+        if (agility_obstacle === sample_color) {
+            var screen_x = random_x + obstacle_x;
+            var screen_y = random_y + obstacle_y;
 
-            console.log("Found cow at: " + screen_x + ", " + screen_y + " with the color " + sample_color);
+            console.log("Found agility obstacle at: " + screen_x + ", " + screen_y);
+            return { x: screen_x, y: screen_y };
+        } 
+    }
+
+    img = robot.screen.capture(mark_x, mark_y, mark_width, mark_height);
+
+    for (var i = 0; i < 10000; i++) {
+        var random_x = getRandomInt(0, mark_width - 1);
+        var random_y = getRandomInt(0, mark_height - 1);
+        var sample_color = img.colorAt(random_x, random_y);
+        if (mark_of_grace_colors.includes(sample_color)) {
+            var screen_x = random_x + mark_x;
+            var screen_y = random_y + mark_y;
+
+            console.log("Found mark of grace at: " + screen_x + ", " + screen_y);
             return { x: screen_x, y: screen_y };
         }
     }
