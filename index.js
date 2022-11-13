@@ -71,8 +71,6 @@ function findMob() {
 
 function findSquare() {
 
-    // ADD ABILITY TO FIND MARKS OF GRACE
-
     var mark_x = 300, mark_y = 300, mark_width = 1300, mark_height = 400
 
     var obstacle_x = 100, obstacle_y = 100, obstacle_width = 1300, obstacle_height = 800;
@@ -162,17 +160,6 @@ function treeGnomeStrongholdAgilityTraining() {
     // back to the start
     robot.moveMouse(1247,475);
     robot.mouseClick();
-}
-
-function draynorVillageAgilityTraining() {
-    var sleepTime = 6000;
-
-    robot.moveMouse(875,515);
-    robot.mouseClick();
-}
-
-function farmCrabs() {
-    sleep(600000);
 }
 
 function getRandomInt(min, max) {
