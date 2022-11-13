@@ -1,9 +1,10 @@
 var robot = require('robotjs');
 
 function main() {
-    var couldNotFindMob = 0;
-    var mobsFarmed = 0;
-    var mobsFarmedBeforeRunToggle = 200;
+    var couldNotFindObject = 0;
+    var marksFound = 0;
+    var objectsFound = 0;
+    var objectsFoundBeforeRunToggle = 200;
     var toggleRunButtonX = 1723;
     var toggleRunButtonY = 154;
 
@@ -15,16 +16,20 @@ function main() {
         var mob = findSquare();
 
         if (mob === false) {
-            console.log("I have missed " + ++couldNotFindMob + " mobs");
+            console.log("I have been unable find my target " + ++couldNotFindObject + " times");
         } else {
             robot.moveMouse(mob.x, mob.y);
             robot.mouseClick();
-            console.log(++mobsFarmed + " mobs have fell to my wrath");
-            // toggle run
-            if (mobsFarmed % mobsFarmedBeforeRunToggle === 0) {
-                robot.moveMouseSmooth(toggleRunButtonX, toggleRunButtonY);
-                robot.mouseClick();
+            if (mob.object === "marks of grace") {
+                console.log(++marksFound + " marks of grace have been found");
+            } else {
+                console.log(++objectsFound + " " + mob.object + " have been located");
             }
+            // toggle run
+            // if (objectsFound % objectsFoundBeforeRunToggle === 0) {
+            //     robot.moveMouseSmooth(toggleRunButtonX, toggleRunButtonY);
+            //     robot.mouseClick();
+            // }
             sleep(10000);
         }
 
@@ -46,7 +51,7 @@ function findMob() {
             var screen_y = random_y + y;
 
             console.log("Found mob at: " + screen_x + ", " + screen_y);
-            return { x: screen_x, y: screen_y };
+            return { x: screen_x, y: screen_y, object: "mobs" };
         }
     }
 
@@ -62,7 +67,7 @@ function findSquare() {
     var obstacle_x = 100, obstacle_y = 100, obstacle_width = 1300, obstacle_height = 800;
     
     var agility_obstacle = "ff0000";
-    var mark_of_grace_colors = ["00ff00", "00cd00"];
+    var mark_of_grace_colors = ["00ff00", "00cd00", "00a500"];
 
     var img = robot.screen.capture(obstacle_x, obstacle_y, obstacle_width, obstacle_height);
 
@@ -75,7 +80,7 @@ function findSquare() {
             var screen_y = random_y + obstacle_y;
 
             console.log("Found agility obstacle at: " + screen_x + ", " + screen_y);
-            return { x: screen_x, y: screen_y };
+            return { x: screen_x, y: screen_y, object: "agility obstacles" };
         } 
     }
 
@@ -90,7 +95,7 @@ function findSquare() {
             var screen_y = random_y + mark_y;
 
             console.log("Found mark of grace at: " + screen_x + ", " + screen_y);
-            return { x: screen_x, y: screen_y };
+            return { x: screen_x, y: screen_y , object: "marks of grace"};
         }
     }
 
