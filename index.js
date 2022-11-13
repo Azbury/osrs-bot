@@ -1,19 +1,20 @@
 var robot = require('robotjs');
 
 function main() {
-    var couldNotFindObject = 0;
-    var marksFound = 0;
-    var objectsFound = 0;
-    var objectsFoundBeforeRunToggle = 200;
-    var toggleRunButtonX = 1723;
-    var toggleRunButtonY = 154;
-
+    let couldNotFindObject = 0;
+    let marksFound = 0;
+    let objectsFound = 0;
+    const objectsFoundBeforeRunToggle = 150;
+    const toggleRunButtonX = 1723;
+    const toggleRunButtonY = 154;
+    const agilitySleepDelay = 9000;
+    const mobSleepDelay = 12000;
 
     console.log("starting");
     sleep(4000);
 
     while (true) {
-        var mob = findSquare();
+        var mob = findMob();
 
         if (mob === false) {
             console.log("I have been unable find my target " + ++couldNotFindObject + " times");
@@ -26,11 +27,11 @@ function main() {
                 console.log(++objectsFound + " " + mob.object + " have been located");
             }
             // toggle run
-            // if (objectsFound % objectsFoundBeforeRunToggle === 0) {
-            //     robot.moveMouseSmooth(toggleRunButtonX, toggleRunButtonY);
-            //     robot.mouseClick();
-            // }
-            sleep(10000);
+            if (objectsFound % objectsFoundBeforeRunToggle === 0) {
+                robot.moveMouseSmooth(toggleRunButtonX, toggleRunButtonY);
+                robot.mouseClick();
+            }
+            sleep(mobSleepDelay);
         }
 
     }
