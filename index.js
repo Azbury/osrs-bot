@@ -15,19 +15,16 @@ function main() {
     let foodCount = 0;
     let marksFound = 0;
     let objectsFound = 0;
-    let running = true;
 
     console.log("starting");
     sleep(4000);
 
-    console.log("Running = " + running);
-
-    //doubleCrabNearWCGuild();
+    //fourCrabBottomLeft();
 
     while (true) {
 
-        doubleCrabNearWCGuild();
-        eatFood(foodCount++);
+        fourCrabBottomLeft();
+        // eatFood(foodCount++);
         console.log("The crabs have been reset " + ++crabResets + " times");
 
         // var mob = findMob();
@@ -176,7 +173,7 @@ function treeGnomeStrongholdAgilityTraining() {
 
 function singleCrabNearAltar() {
     // wait 11 mins
-    //sleep(660000);
+    sleep(660000);
 
     robot.moveMouse(370,448);
     robot.mouseClick();
@@ -221,7 +218,30 @@ function doubleCrabNearWCGuild() {
 
     sleep(11000);
 
-    robot.moveMouse(515,750);
+    robot.moveMouse(540,725);
+    robot.mouseClick();
+}
+
+function fourCrabBottomLeft() {
+    // wait 11 mins
+    sleep(660000)
+
+    robot.moveMouse(1656,535);
+    robot.mouseClick();
+
+    sleep(11000);
+
+    robot.moveMouse(1670,626);
+    robot.mouseClick();
+
+    sleep(11000)
+
+    robot.moveMouse(210,471);
+    robot.mouseClick();
+
+    sleep(11000);
+
+    robot.moveMouse(305,510);
     robot.mouseClick();
 }
 
