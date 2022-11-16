@@ -12,6 +12,7 @@ function main() {
 
     let crabResets = 0;
     let couldNotFindObject = 0;
+    let foodCount = 0;
     let marksFound = 0;
     let objectsFound = 0;
     let running = true;
@@ -21,11 +22,14 @@ function main() {
 
     console.log("Running = " + running);
 
-    //killCrabs();
+    //doubleCrabNearWCGuild();
 
     while (true) {
-        killCrabs();
+
+        doubleCrabNearWCGuild();
+        eatFood(foodCount++);
         console.log("The crabs have been reset " + ++crabResets + " times");
+
         // var mob = findMob();
 
         // if (mob === false) {
@@ -170,26 +174,93 @@ function treeGnomeStrongholdAgilityTraining() {
     robot.mouseClick();
 }
 
-function killCrabs() {
-    // wait 10 mins
-    sleep(660000);
+function singleCrabNearAltar() {
+    // wait 11 mins
+    //sleep(660000);
 
     robot.moveMouse(370,448);
     robot.mouseClick();
 
-    sleep(15000);
+    sleep(14000);
 
     robot.moveMouse(356,507);
     robot.mouseClick();
 
-    sleep(15000)
+    sleep(14000)
 
     robot.moveMouse(1633,591);
     robot.mouseClick();
 
-    sleep(15000);
+    sleep(14000);
 
     robot.moveMouse(1455,600);
+    robot.mouseClick();
+}
+
+function doubleCrabNearWCGuild() {
+    // wait 11 mins
+    sleep(660000);
+
+    robot.moveMouse(1421,255);
+    robot.mouseClick();
+
+    sleep(11000);
+
+    robot.moveMouse(1107,189);
+    robot.mouseClick();
+
+    sleep(11000);
+
+    robot.moveMouse(705,999)
+    robot.mouseClick();
+
+    sleep(11000);
+
+    robot.moveMouse(567,951);
+    robot.mouseClick();
+
+    sleep(11000);
+
+    robot.moveMouse(515,750);
+    robot.mouseClick();
+}
+
+function eatFood(position) {
+
+    sleep(5000);
+
+    let inventoryCoordinates = [
+        { x: 1699, y: 767},
+        { x: 1742, y: 767},
+        { x: 1783, y: 767},
+        { x: 1826, y: 767},
+        { x: 1699, y: 803},
+        { x: 1742, y: 803},
+        { x: 1783, y: 803},
+        { x: 1826, y: 803},
+        { x: 1699, y: 839},
+        { x: 1742, y: 839},
+        { x: 1783, y: 839},
+        { x: 1826, y: 839},
+        { x: 1699, y: 876},
+        { x: 1742, y: 876},
+        { x: 1783, y: 876},
+        { x: 1826, y: 876},
+        { x: 1699, y: 911},
+        { x: 1742, y: 911},
+        { x: 1783, y: 911},
+        { x: 1826, y: 911},
+        { x: 1699, y: 947},
+        { x: 1742, y: 947},
+        { x: 1783, y: 947},
+        { x: 1826, y: 947},
+        { x: 1699, y: 984},
+        { x: 1742, y: 984},
+        { x: 1783, y: 984},
+        { x: 1826, y: 984}
+    ]
+
+    robot.moveMouse(inventoryCoordinates[position].x, inventoryCoordinates[position].y);
     robot.mouseClick();
 }
 
