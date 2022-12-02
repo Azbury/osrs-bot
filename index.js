@@ -2,7 +2,7 @@ var robot = require('robotjs');
 
 function main() {
     const agilitySleepDelay = 9000;
-    const runMobSleepDelay = 12000;
+    const runMobSleepDelay = 8000;
     const walkMobSleepDelay = 15000;
 
     const objectsFoundBeforeRunToggle = 100;
@@ -10,6 +10,7 @@ function main() {
     const toggleRunButtonX = 1723;
     const toggleRunButtonY = 154;
 
+    let running = true;
     let crabResets = 0;
     let couldNotFindObject = 0;
     let foodCount = 0;
@@ -23,35 +24,35 @@ function main() {
 
     while (true) {
 
-        fourCrabBottomLeft();
+        //fourCrabBottomLeft();
         // eatFood(foodCount++);
-        console.log("The crabs have been reset " + ++crabResets + " times");
+        //console.log("The crabs have been reset " + ++crabResets + " times");
 
-        // var mob = findMob();
+        var mob = findSquare();
 
-        // if (mob === false) {
-        //     console.log("I have been unable find my target " + ++couldNotFindObject + " times");
-        // } else {
-        //     robot.moveMouse(mob.x, mob.y);
-        //     robot.mouseClick();
-        //     if (mob.object === "marks of grace") {
-        //         console.log(++marksFound + " marks of grace have been found");
-        //     } else {
-        //         console.log(++objectsFound + " " + mob.object + " have been located");
-        //     }
-        //     // toggle run
-        //     if (objectsFound % objectsFoundBeforeRunToggle === 0) {
-        //         running = !running;
-        //         console.log("Running = " + running);
-        //         robot.moveMouseSmooth(toggleRunButtonX, toggleRunButtonY);
-        //         robot.mouseClick();
-        //     }
-        //     if (running) {
-        //         sleep(runMobSleepDelay);
-        //     } else {
-        //         sleep(walkMobSleepDelay)
-        //     }
-        // }
+        if (mob === false) {
+            console.log("I have been unable find my target " + ++couldNotFindObject + " times");
+        } else {
+            robot.moveMouse(mob.x, mob.y);
+            robot.mouseClick();
+            if (mob.object === "marks of grace") {
+                console.log(++marksFound + " marks of grace have been found");
+            } else {
+                console.log(++objectsFound + " " + mob.object + " have been located");
+            }
+            // toggle run
+            // if (objectsFound % objectsFoundBeforeRunToggle === 0) {
+            //     running = !running;
+            //     console.log("Running = " + running);
+            //     robot.moveMouseSmooth(toggleRunButtonX, toggleRunButtonY);
+            //     robot.mouseClick();
+            // }
+            if (running) {
+                sleep(runMobSleepDelay);
+            } else {
+                sleep(walkMobSleepDelay)
+            }
+        }
 
     }
 }
@@ -82,10 +83,10 @@ function findSquare() {
 
     var mark_x = 300, mark_y = 300, mark_width = 1300, mark_height = 400
 
-    var obstacle_x = 100, obstacle_y = 100, obstacle_width = 1300, obstacle_height = 800;
+    var obstacle_x = 100, obstacle_y = 100, obstacle_width = 1500, obstacle_height = 900;
     
-    var agility_obstacle = "ff0000";
-    var mark_of_grace_colors = ["00ff00", "00cd00", "00a500"];
+    var agility_obstacle = "ff6000";
+    var mark_of_grace_colors = ["0026ff", "001fcd", "0019a5"];
 
     var img = robot.screen.capture(obstacle_x, obstacle_y, obstacle_width, obstacle_height);
 
