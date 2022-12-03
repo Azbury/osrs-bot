@@ -2,7 +2,7 @@ var robot = require('robotjs');
 
 function main() {
     const agilitySleepDelay = 9000;
-    const runMobSleepDelay = 8000;
+    const runMobSleepDelay = 7500;
     const walkMobSleepDelay = 15000;
 
     const objectsFoundBeforeRunToggle = 100;
@@ -86,7 +86,20 @@ function findSquare() {
     var obstacle_x = 100, obstacle_y = 100, obstacle_width = 1500, obstacle_height = 900;
     
     var agility_obstacle = "ff6000";
-    var mark_of_grace_colors = ["0026ff", "001fcd", "0019a5"];
+
+    // Using actual mark of grace colors
+    var mark_of_grace_colors = [
+        "ae920b",
+        "a0870a",
+        "a78c0b", 
+        "a4880a", 
+        "867109", 
+        "8c7409", 
+        "7e6a08", 
+        "685806", 
+        "715e07", 
+        "6a5906"
+    ];
 
     var img = robot.screen.capture(obstacle_x, obstacle_y, obstacle_width, obstacle_height);
 
