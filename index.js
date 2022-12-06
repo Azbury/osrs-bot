@@ -89,9 +89,9 @@ function findSquare() {
 
     var obstacle_x = 100, obstacle_y = 0, obstacle_width = 1700, obstacle_height = 900;
     
-    var agility_obstacle_colors = ["ff6000"];
+    var agility_obstacle_colors = ["ff6000", "cd4d00"];
 
-    var mark_of_grace_overlay_color = ["0026ff", "001fcd"]
+    var mark_of_grace_overlay_color = ["0026ff", "001fcd", "0019a5"]
 
     // Using actual mark of grace colors
     var mark_of_grace_colors = [
