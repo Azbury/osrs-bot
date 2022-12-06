@@ -1,6 +1,8 @@
 var robot = require('robotjs');
 
 function main() {
+    const canifisAgilityDelay = 7500;
+    const faladorAgilityDelay = 5000;
     const agilitySleepDelay = 9000;
     const runMobSleepDelay = 7500;
     const walkMobSleepDelay = 15000;
@@ -31,7 +33,8 @@ function main() {
         var mob = findSquare();
 
         if (mob === false) {
-            console.log("I have been unable find my target " + ++couldNotFindObject + " times");
+            console.log("Searching...")
+            //console.log("I have been unable find my target " + ++couldNotFindObject + " times");
         } else {
             robot.moveMouse(mob.x, mob.y);
             robot.mouseClick();
@@ -47,11 +50,12 @@ function main() {
             //     robot.moveMouseSmooth(toggleRunButtonX, toggleRunButtonY);
             //     robot.mouseClick();
             // }
-            if (running) {
-                sleep(runMobSleepDelay);
-            } else {
-                sleep(walkMobSleepDelay)
-            }
+            // if (running) {
+            //     sleep(runMobSleepDelay);
+            // } else {
+            //     sleep(walkMobSleepDelay)
+            // }
+            sleep(faladorAgilityDelay);
         }
 
     }
@@ -83,9 +87,11 @@ function findSquare() {
 
     var mark_x = 300, mark_y = 300, mark_width = 1300, mark_height = 400
 
-    var obstacle_x = 100, obstacle_y = 100, obstacle_width = 1500, obstacle_height = 900;
+    var obstacle_x = 100, obstacle_y = 0, obstacle_width = 1700, obstacle_height = 900;
     
-    var agility_obstacle = "ff6000";
+    var agility_obstacle_colors = ["ff6000"];
+
+    var mark_of_grace_overlay_color = ["0026ff", "001fcd"]
 
     // Using actual mark of grace colors
     var mark_of_grace_colors = [
@@ -103,11 +109,11 @@ function findSquare() {
 
     var img = robot.screen.capture(obstacle_x, obstacle_y, obstacle_width, obstacle_height);
 
-    for (var i = 0; i < 10000; i++) {
+    for (var i = 0; i < 100; i++) {
         var random_x = getRandomInt(0, obstacle_width - 1);
         var random_y = getRandomInt(0, obstacle_height - 1);
         var sample_color = img.colorAt(random_x, random_y);
-        if (agility_obstacle === sample_color) {
+        if (agility_obstacle_colors.includes(sample_color)) {
             var screen_x = random_x + obstacle_x;
             var screen_y = random_y + obstacle_y;
 
@@ -118,11 +124,11 @@ function findSquare() {
 
     img = robot.screen.capture(mark_x, mark_y, mark_width, mark_height);
 
-    for (var i = 0; i < 10000; i++) {
+    for (var i = 0; i < 100; i++) {
         var random_x = getRandomInt(0, mark_width - 1);
         var random_y = getRandomInt(0, mark_height - 1);
         var sample_color = img.colorAt(random_x, random_y);
-        if (mark_of_grace_colors.includes(sample_color)) {
+        if (mark_of_grace_overlay_color.includes(sample_color)) {
             var screen_x = random_x + mark_x;
             var screen_y = random_y + mark_y;
 
