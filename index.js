@@ -18,45 +18,49 @@ function main() {
     let foodCount = 0;
     let marksFound = 0;
     let objectsFound = 0;
+    
+    let tinderboxPosition = 0;
+    let currentInventoryPosition = 1;
 
     console.log("starting");
-    sleep(4000);
+    sleep(3000);
 
     //fourCrabBottomLeft();
 
     while (true) {
-
+        useInventory(tinderboxPosition);
+        useInventory(currentInventoryPosition++);
         //fourCrabBottomLeft();
-        // eatFood(foodCount++);
+        // useInventory(foodCount++);
         //console.log("The crabs have been reset " + ++crabResets + " times");
 
-        var mob = findSquare();
+        // var mob = findSquare();
 
-        if (mob === false) {
-            console.log("Searching...")
-            //console.log("I have been unable find my target " + ++couldNotFindObject + " times");
-        } else {
-            robot.moveMouse(mob.x, mob.y);
-            robot.mouseClick();
-            if (mob.object === "marks of grace") {
-                console.log(++marksFound + " marks of grace have been found");
-            } else {
-                console.log(++objectsFound + " " + mob.object + " have been located");
-            }
-            // toggle run
-            // if (objectsFound % objectsFoundBeforeRunToggle === 0) {
-            //     running = !running;
-            //     console.log("Running = " + running);
-            //     robot.moveMouseSmooth(toggleRunButtonX, toggleRunButtonY);
-            //     robot.mouseClick();
-            // }
-            // if (running) {
-            //     sleep(runMobSleepDelay);
-            // } else {
-            //     sleep(walkMobSleepDelay)
-            // }
-            sleep(faladorAgilityDelay);
-        }
+        // if (mob === false) {
+        //     console.log("Searching...")
+        //     //console.log("I have been unable find my target " + ++couldNotFindObject + " times");
+        // } else {
+        //     robot.moveMouse(mob.x, mob.y);
+        //     robot.mouseClick();
+        //     if (mob.object === "marks of grace") {
+        //         console.log(++marksFound + " marks of grace have been found");
+        //     } else {
+        //         console.log(++objectsFound + " " + mob.object + " have been located");
+        //     }
+        //     // toggle run
+        //     // if (objectsFound % objectsFoundBeforeRunToggle === 0) {
+        //     //     running = !running;
+        //     //     console.log("Running = " + running);
+        //     //     robot.moveMouseSmooth(toggleRunButtonX, toggleRunButtonY);
+        //     //     robot.mouseClick();
+        //     // }
+        //     // if (running) {
+        //     //     sleep(runMobSleepDelay);
+        //     // } else {
+        //     //     sleep(walkMobSleepDelay)
+        //     // }
+        //     sleep(faladorAgilityDelay);
+        // }
 
     }
 }
@@ -265,7 +269,7 @@ function fourCrabBottomLeft() {
     robot.mouseClick();
 }
 
-function eatFood(position) {
+function useInventory(position) {
 
     sleep(5000);
 
