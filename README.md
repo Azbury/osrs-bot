@@ -1,4 +1,4 @@
-This is a Old School Runescape bot used to farm cows and run agility courses.
+This is a Old School Runescape bot that can perform various tasks throughout Gielinor.
 
 # Cow Farming
 
