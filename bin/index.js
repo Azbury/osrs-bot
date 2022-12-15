@@ -27,12 +27,17 @@ function playNightmareZone() {
     let overloadPotPosition = 0;
     let prayerPotPosition = 6;
 
+    let overloadPotCount = 0;
+    let prayerPotCount = 0;
+
     setInterval(() => {
         useInventory(overloadPotPosition)
+        if (++overloadPotCount % 4 === 0) overloadPotPosition++;
     }, 300000); // 5 minutes
 
     setInterval(() => {
         useInventory(prayerPotPosition)
+        if (++prayerPotCount % 4 === 0) prayerPotPosition++;
     }, 39 * 1000); // 39 seconds
 }
 
