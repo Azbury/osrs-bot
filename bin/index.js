@@ -1,4 +1,40 @@
+#! /usr/bin/env node
+
 var robot = require('robotjs');
+const { argv } = require('yargs');
+var yargs = require("yargs");
+
+var usage = '\nA bot for OSRS'
+
+const options = yargs  
+  .usage(usage)
+  .option("fire", { describe: "Make fires" })
+  .option("nmz", { describe: "Nightmare Zone" })
+  .help('info')
+  .argv;
+
+const firemaking = argv.fire;
+const nightmareZone = argv.nmz;
+
+if (firemaking) makeFires();
+if (nightmareZone) playNightmareZone();
+
+function makeFires() {
+    console.log('test')
+}
+
+function playNightmareZone() {
+    let overloadPotPosition = 0;
+    let prayerPotPosition = 6;
+
+    setInterval(() => {
+        useInventory(overloadPotPosition)
+    }, 300000); // 5 minutes
+
+    setInterval(() => {
+        useInventory(prayerPotPosition)
+    }, 39 * 1000); // 39 seconds
+}
 
 function main() {
     const canifisAgilityDelay = 7500;
@@ -19,17 +55,39 @@ function main() {
     let marksFound = 0;
     let objectsFound = 0;
     
-    let tinderboxPosition = 0;
+    let tinderboxPosition = 3;
     let currentInventoryPosition = 1;
+    let firstPrayerPotPosition = 6;
+    let overloadPotPosition = 0;
 
-    console.log("starting");
-    sleep(3000);
+    // console.log("starting");
+    // sleep(3000);
 
-    //fourCrabBottomLeft();
+    // //fourCrabBottomLeft();
 
-    while (true) {
-        useInventory(tinderboxPosition);
-        useInventory(currentInventoryPosition++);
+    // console.log('before interval')
+
+    // setInterval(() => {
+    //     console.log('in interval')
+    //     useInventory(overloadPotPosition)
+    // }, 5 * 1000); // 60 * 1000 milsec
+
+    // setInterval(() => {
+    //     console.log('in interval 2')
+    //     useInventory(overloadPotPosition + 1)
+    // }, 17 * 1000); // 60 * 1000 milsec
+
+    // console.log('after invetory')
+
+    //while (true) {
+        
+        //useInventory(tinderboxPosition++);
+
+        // firemaking
+        // useInventory(tinderboxPosition);
+        // useInventory(currentInventoryPosition++);
+
+
         //fourCrabBottomLeft();
         // useInventory(foodCount++);
         //console.log("The crabs have been reset " + ++crabResets + " times");
@@ -62,7 +120,7 @@ function main() {
         //     sleep(faladorAgilityDelay);
         // }
 
-    }
+    //}
 }
 
 function findMob() {
@@ -271,7 +329,7 @@ function fourCrabBottomLeft() {
 
 function useInventory(position) {
 
-    sleep(5000);
+    //sleep(39000);
 
     let inventoryCoordinates = [
         { x: 1699, y: 767},
