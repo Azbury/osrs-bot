@@ -13,17 +13,14 @@ const options = yargs
   .help('info')
   .argv;
 
-const firemaking = argv.fire;
-const nightmareZone = argv.nmz;
+if (argv.fire) firemaking();
+if (argv.nmz) nightmareZone();
 
-if (firemaking) makeFires();
-if (nightmareZone) playNightmareZone();
-
-function makeFires() {
+function firemaking() {
     console.log('test')
 }
 
-function playNightmareZone() {
+function nightmareZone() {
     let overloadPotPosition = 0;
     let prayerPotPosition = 6;
 
@@ -33,12 +30,12 @@ function playNightmareZone() {
     setInterval(() => {
         useInventory(overloadPotPosition)
         if (++overloadPotCount % 4 === 0) overloadPotPosition++;
-    }, 300000); // 5 minutes
+    }, 310000); // 5 minutes and 10 seconds 
 
     setInterval(() => {
         useInventory(prayerPotPosition)
         if (++prayerPotCount % 4 === 0) prayerPotPosition++;
-    }, 39 * 1000); // 39 seconds
+    }, 5 * 1000); // 39 seconds
 }
 
 function main() {
