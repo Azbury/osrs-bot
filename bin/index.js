@@ -8,15 +8,17 @@ var usage = '\nA bot for OSRS'
 
 const options = yargs  
   .usage(usage)
-  .option("fire", { describe: "Make fires" })
-  .option("nmz", { describe: "Nightmare Zone" })
   .option("agility", { describe: "Run agility course"})
+  .option("fire", { describe: "Make fires" })
+  .option("motherload", { describe: "Motherload Mine"})
+  .option("nmz", { describe: "Nightmare Zone" })
   .help('info')
   .argv;
 
-if (argv.fire) firemaking();
-if (argv.nmz) nightmareZone();
 if (argv.agility) agility();
+if (argv.fire) firemaking();
+if (argv.motherload) motherloadMine();
+if (argv.nmz) nightmareZone();
 
 function firemaking() {
     console.log('test')
@@ -59,6 +61,24 @@ function agility() {
                 console.log(++obstaclesFound + " " + mob.object + " have been located");
             }
             sleep(5000);
+        }
+    }
+}
+
+function motherloadMine() {
+    let oresFound = 0;
+
+    while(true) {
+        let ore = findMotherloadOre();
+
+        if (ore === false) {
+            console.log("Searching...")
+            //console.log("I have been unable find my target " + ++couldNotFindObject + " times");
+        } else {
+            robot.moveMouse(ore.x, ore.y);
+            robot.mouseClick();
+            console.log(++oresFound + " " + ore.object + " have been located");
+            sleep(15000);
         }
     }
 }
@@ -166,6 +186,35 @@ function findMob() {
 
             console.log("Found mob at: " + screen_x + ", " + screen_y);
             return { x: screen_x, y: screen_y, object: "mobs" };
+        }
+    }
+
+    return false;
+}
+
+function findMotherloadOre() {
+    var x = 500, y = 100, width = 1300, height = 400;
+    var img = robot.screen.capture(x, y, width, height);
+    
+    let oreColors = [
+        "615858",
+        "4f4848",
+        "46403f",
+        "585050",
+        "5d5454",
+        "564e4e",
+    ]
+
+    for (var i = 0; i < 100; i++) {
+        var random_x = getRandomInt(0, width - 1);
+        var random_y = getRandomInt(0, height - 1);
+        var sample_color = img.colorAt(random_x, random_y);
+        if (oreColors.includes(sample_color)) {
+            var screen_x = random_x + x;
+            var screen_y = random_y + y;
+
+            console.log("Found mob at: " + screen_x + ", " + screen_y);
+            return { x: screen_x, y: screen_y, object: "ores" };
         }
     }
 
