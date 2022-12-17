@@ -10,11 +10,13 @@ const options = yargs
   .usage(usage)
   .option("fire", { describe: "Make fires" })
   .option("nmz", { describe: "Nightmare Zone" })
+  .option("agility", { describe: "Run agility course"})
   .help('info')
   .argv;
 
 if (argv.fire) firemaking();
 if (argv.nmz) nightmareZone();
+if (argv.agility) agility();
 
 function firemaking() {
     console.log('test')
@@ -22,20 +24,43 @@ function firemaking() {
 
 function nightmareZone() {
     let overloadPotPosition = 0;
-    let prayerPotPosition = 6;
+    let prayerPotPosition = 4;
 
-    let overloadPotCount = 0;
-    let prayerPotCount = 0;
+    let overloadPotCount = 1;
+    let prayerPotCount = 2;
 
     setInterval(() => {
         useInventory(overloadPotPosition)
         if (++overloadPotCount % 4 === 0) overloadPotPosition++;
-    }, 310000); // 5 minutes and 10 seconds 
+    }, 305000); // 5 minutes and 5 seconds 
 
     setInterval(() => {
         useInventory(prayerPotPosition)
         if (++prayerPotCount % 4 === 0) prayerPotPosition++;
-    }, 5 * 1000); // 39 seconds
+    }, 39 * 1000); // 39 seconds
+}
+
+function agility() {
+    let marksFound = 0;
+    let obstaclesFound = 0;
+
+    while(true) {
+        let mob = findSquare();
+
+        if (mob === false) {
+            console.log("Searching...")
+            //console.log("I have been unable find my target " + ++couldNotFindObject + " times");
+        } else {
+            robot.moveMouse(mob.x, mob.y);
+            robot.mouseClick();
+            if (mob.object === "marks of grace") {
+                console.log(++marksFound + " marks of grace have been found");
+            } else {
+                console.log(++obstaclesFound + " " + mob.object + " have been located");
+            }
+            sleep(5000);
+        }
+    }
 }
 
 function main() {
@@ -94,33 +119,33 @@ function main() {
         // useInventory(foodCount++);
         //console.log("The crabs have been reset " + ++crabResets + " times");
 
-        // var mob = findSquare();
+        var mob = findSquare();
 
-        // if (mob === false) {
-        //     console.log("Searching...")
-        //     //console.log("I have been unable find my target " + ++couldNotFindObject + " times");
-        // } else {
-        //     robot.moveMouse(mob.x, mob.y);
-        //     robot.mouseClick();
-        //     if (mob.object === "marks of grace") {
-        //         console.log(++marksFound + " marks of grace have been found");
-        //     } else {
-        //         console.log(++objectsFound + " " + mob.object + " have been located");
-        //     }
-        //     // toggle run
-        //     // if (objectsFound % objectsFoundBeforeRunToggle === 0) {
-        //     //     running = !running;
-        //     //     console.log("Running = " + running);
-        //     //     robot.moveMouseSmooth(toggleRunButtonX, toggleRunButtonY);
-        //     //     robot.mouseClick();
-        //     // }
-        //     // if (running) {
-        //     //     sleep(runMobSleepDelay);
-        //     // } else {
-        //     //     sleep(walkMobSleepDelay)
-        //     // }
-        //     sleep(faladorAgilityDelay);
-        // }
+        if (mob === false) {
+            console.log("Searching...")
+            //console.log("I have been unable find my target " + ++couldNotFindObject + " times");
+        } else {
+            robot.moveMouse(mob.x, mob.y);
+            robot.mouseClick();
+            if (mob.object === "marks of grace") {
+                console.log(++marksFound + " marks of grace have been found");
+            } else {
+                console.log(++objectsFound + " " + mob.object + " have been located");
+            }
+            // toggle run
+            // if (objectsFound % objectsFoundBeforeRunToggle === 0) {
+            //     running = !running;
+            //     console.log("Running = " + running);
+            //     robot.moveMouseSmooth(toggleRunButtonX, toggleRunButtonY);
+            //     robot.mouseClick();
+            // }
+            // if (running) {
+            //     sleep(runMobSleepDelay);
+            // } else {
+            //     sleep(walkMobSleepDelay)
+            // }
+            sleep(faladorAgilityDelay);
+        }
 
     //}
 }
