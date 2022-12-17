@@ -21,7 +21,15 @@ if (argv.motherload) motherloadMine();
 if (argv.nmz) nightmareZone();
 
 function firemaking() {
-    console.log('test')
+    let tinderboxPosition = 0;
+    let currentInventoryPosition = 1;
+
+    while (currentInventoryPosition < 28) {
+        useInventory(tinderboxPosition);
+        sleep(2000);
+        useInventory(currentInventoryPosition++);
+        sleep(2500);
+    }
 }
 
 function nightmareZone() {
@@ -138,35 +146,6 @@ function main() {
         //fourCrabBottomLeft();
         // useInventory(foodCount++);
         //console.log("The crabs have been reset " + ++crabResets + " times");
-
-        var mob = findSquare();
-
-        if (mob === false) {
-            console.log("Searching...")
-            //console.log("I have been unable find my target " + ++couldNotFindObject + " times");
-        } else {
-            robot.moveMouse(mob.x, mob.y);
-            robot.mouseClick();
-            if (mob.object === "marks of grace") {
-                console.log(++marksFound + " marks of grace have been found");
-            } else {
-                console.log(++objectsFound + " " + mob.object + " have been located");
-            }
-            // toggle run
-            // if (objectsFound % objectsFoundBeforeRunToggle === 0) {
-            //     running = !running;
-            //     console.log("Running = " + running);
-            //     robot.moveMouseSmooth(toggleRunButtonX, toggleRunButtonY);
-            //     robot.mouseClick();
-            // }
-            // if (running) {
-            //     sleep(runMobSleepDelay);
-            // } else {
-            //     sleep(walkMobSleepDelay)
-            // }
-            sleep(faladorAgilityDelay);
-        }
-
     //}
 }
 
@@ -404,9 +383,6 @@ function fourCrabBottomLeft() {
 }
 
 function useInventory(position) {
-
-    //sleep(39000);
-
     let inventoryCoordinates = [
         { x: 1699, y: 767},
         { x: 1742, y: 767},
