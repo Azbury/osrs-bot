@@ -26,9 +26,9 @@ function firemaking() {
 
     while (currentInventoryPosition < 28) {
         useInventory(tinderboxPosition);
-        sleep(2000);
+        sleep(3000);
         useInventory(currentInventoryPosition++);
-        sleep(2500);
+        sleep(3000);
     }
 }
 
@@ -37,7 +37,7 @@ function nightmareZone() {
     let prayerPotPosition = 4;
 
     let overloadPotCount = 1;
-    let prayerPotCount = 2;
+    let prayerPotCount = 0;
 
     setInterval(() => {
         useInventory(overloadPotPosition)
@@ -47,7 +47,7 @@ function nightmareZone() {
     setInterval(() => {
         useInventory(prayerPotPosition)
         if (++prayerPotCount % 4 === 0) prayerPotPosition++;
-    }, 39 * 1000); // 39 seconds
+    }, 42 * 1000); // 39 seconds
 }
 
 function agility() {
@@ -89,64 +89,6 @@ function motherloadMine() {
             sleep(15000);
         }
     }
-}
-
-function main() {
-    const canifisAgilityDelay = 7500;
-    const faladorAgilityDelay = 5000;
-    const agilitySleepDelay = 9000;
-    const runMobSleepDelay = 7500;
-    const walkMobSleepDelay = 15000;
-
-    const objectsFoundBeforeRunToggle = 100;
-
-    const toggleRunButtonX = 1723;
-    const toggleRunButtonY = 154;
-
-    let running = true;
-    let crabResets = 0;
-    let couldNotFindObject = 0;
-    let foodCount = 0;
-    let marksFound = 0;
-    let objectsFound = 0;
-    
-    let tinderboxPosition = 3;
-    let currentInventoryPosition = 1;
-    let firstPrayerPotPosition = 6;
-    let overloadPotPosition = 0;
-
-    // console.log("starting");
-    // sleep(3000);
-
-    // //fourCrabBottomLeft();
-
-    // console.log('before interval')
-
-    // setInterval(() => {
-    //     console.log('in interval')
-    //     useInventory(overloadPotPosition)
-    // }, 5 * 1000); // 60 * 1000 milsec
-
-    // setInterval(() => {
-    //     console.log('in interval 2')
-    //     useInventory(overloadPotPosition + 1)
-    // }, 17 * 1000); // 60 * 1000 milsec
-
-    // console.log('after invetory')
-
-    //while (true) {
-        
-        //useInventory(tinderboxPosition++);
-
-        // firemaking
-        // useInventory(tinderboxPosition);
-        // useInventory(currentInventoryPosition++);
-
-
-        //fourCrabBottomLeft();
-        // useInventory(foodCount++);
-        //console.log("The crabs have been reset " + ++crabResets + " times");
-    //}
 }
 
 function findMob() {
@@ -204,9 +146,9 @@ function findSquare() {
 
     var mark_x = 300, mark_y = 300, mark_width = 1300, mark_height = 400
 
-    var obstacle_x = 100, obstacle_y = 0, obstacle_width = 1700, obstacle_height = 900;
+    var obstacle_x = 100, obstacle_y = 0, obstacle_width = 1820, obstacle_height = 900;
     
-    var agility_obstacle_colors = ["ff6000", "cd4d00"];
+    var agility_obstacle_colors = ["e700ff", "ba00cd"];
 
     var mark_of_grace_overlay_color = ["0026ff", "001fcd", "0019a5"]
 
@@ -427,5 +369,3 @@ function getRandomInt(min, max) {
 function sleep(ms) {
     Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
 }
-
-main();
