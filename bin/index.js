@@ -9,6 +9,7 @@ var usage = '\nA bot for OSRS'
 const options = yargs  
   .usage(usage)
   .option("agility", { describe: "Run agility course"})
+  .option("craft", { describe: "Crafting gems" })
   .option("fire", { describe: "Make fires" })
   .option("motherload", { describe: "Motherload Mine"})
   .option("nmz", { describe: "Nightmare Zone" })
@@ -16,9 +17,34 @@ const options = yargs
   .argv;
 
 if (argv.agility) agility();
+if (argv.craft) crafting();
 if (argv.fire) firemaking();
 if (argv.motherload) motherloadMine();
 if (argv.nmz) nightmareZone();
+
+function crafting() {
+    let chiselPosition = 0;
+    let firstGemPosition = 1;
+
+    while (true) {
+        useInventory(chiselPosition);
+        sleep(3000);
+        useInventory(firstGemPosition);
+        sleep(3000);
+        robot.moveMouse(259, 966);
+        robot.mouseClick();
+        sleep(35000) // 35 seconds
+        robot.moveMouse(981,907);
+        robot.mouseClick();
+        sleep(5000)
+        useInventory(firstGemPosition);
+        sleep(5000);
+        useBank(0);
+        sleep(5000);
+        closeBank();
+        sleep(5000);
+    }
+}
 
 function firemaking() {
     let tinderboxPosition = 0;
@@ -357,6 +383,24 @@ function useInventory(position) {
     ]
 
     robot.moveMouse(inventoryCoordinates[position].x, inventoryCoordinates[position].y);
+    robot.mouseClick();
+}
+
+function useBank(position) {
+    let bankCoordinates = [
+        { x: 646 , y: 143 }
+    ]
+
+    robot.moveMouse(bankCoordinates[position].x, bankCoordinates[position].y);
+    robot.mouseClick();
+}
+
+function closeBank() {
+    moveAndClick(1043, 66);
+}
+
+function moveAndClick(x, y) {
+    robot.moveMouse(x, y);
     robot.mouseClick();
 }
 
