@@ -36,13 +36,13 @@ function crafting() {
         sleep(35000) // 35 seconds
         robot.moveMouse(981,907);
         robot.mouseClick();
-        sleep(5000)
+        sleep(3000)
         useInventory(firstGemPosition);
-        sleep(5000);
+        sleep(3000);
         useBank(0);
-        sleep(5000);
+        sleep(3000);
         closeBank();
-        sleep(5000);
+        sleep(3000);
     }
 }
 
