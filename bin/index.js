@@ -47,7 +47,7 @@ function nightmareZone() {
     setInterval(() => {
         useInventory(prayerPotPosition)
         if (++prayerPotCount % 4 === 0) prayerPotPosition++;
-    }, 42 * 1000); // 39 seconds
+    }, 48 * 1000); // 50 seconds
 }
 
 function agility() {
