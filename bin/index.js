@@ -9,40 +9,68 @@ var usage = '\nA bot for OSRS'
 const options = yargs  
   .usage(usage)
   .option("agility", { describe: "Run agility course"})
+  .option("crab", { describe: "Farm crabs" })
   .option("craft", { describe: "Crafting gems" })
   .option("fire", { describe: "Make fires" })
+  .option("mob", { describe: "Attack mobs"})
   .option("motherload", { describe: "Motherload Mine"})
   .option("nmz", { describe: "Nightmare Zone" })
   .help('info')
   .argv;
 
 if (argv.agility) agility();
+if (argv.crab) farmCrabs();
 if (argv.craft) crafting();
 if (argv.fire) firemaking();
+if (argv.mob) attackMobs();
 if (argv.motherload) motherloadMine();
 if (argv.nmz) nightmareZone();
+
+function attackMobs() {
+    let mobsFound = 0;
+
+    while(true) {
+        let mob = findMob();
+
+        if (mob === false) {
+            console.log("Searching...")
+        } else {
+            moveAndClick(mob.x, mob.y);
+            console.log(++mobsFound + " " + mob.object + " have been located");
+            sleep(5000);
+        }
+    }
+}
 
 function crafting() {
     let chiselPosition = 0;
     let firstGemPosition = 1;
+    let craftSleep = 3000; // 3 sec
 
     while (true) {
         useInventory(chiselPosition);
-        sleep(3000);
+        sleep(craftSleep);
         useInventory(firstGemPosition);
-        sleep(3000);
-        robot.moveMouse(259, 966);
-        robot.mouseClick();
+        sleep(craftSleep);
+        moveAndClick(259,966); // start crafting
         sleep(35000) // 35 seconds
-        robot.moveMouse(981,907);
-        robot.mouseClick();
-        sleep(3000)
+        moveAndClick(981,907); // click bank booth
+        sleep(craftSleep)
         useInventory(firstGemPosition);
-        sleep(3000);
+        sleep(craftSleep);
         useBank(0);
-        sleep(3000);
+        sleep(craftSleep);
         closeBank();
-        sleep(3000);
+        sleep(craftSleep);
+    }
+}
+
+function farmCrabs() {
+    let crabResets = 0;
+
+    while (true) {
+        fourCrabBottomLeft();
+        console.log("The crabs have been reset " + ++crabResets + " times");
     }
 }
 
@@ -81,18 +109,16 @@ function agility() {
     let obstaclesFound = 0;
 
     while(true) {
-        let mob = findSquare();
+        let square = findSquare();
 
-        if (mob === false) {
+        if (square === false) {
             console.log("Searching...")
-            //console.log("I have been unable find my target " + ++couldNotFindObject + " times");
         } else {
-            robot.moveMouse(mob.x, mob.y);
-            robot.mouseClick();
-            if (mob.object === "marks of grace") {
+            moveAndClick(square.x, square.y);
+            if (square.object === "marks of grace") {
                 console.log(++marksFound + " marks of grace have been found");
             } else {
-                console.log(++obstaclesFound + " " + mob.object + " have been located");
+                console.log(++obstaclesFound + " " + square.object + " have been located");
             }
             sleep(5000);
         }
@@ -107,10 +133,8 @@ function motherloadMine() {
 
         if (ore === false) {
             console.log("Searching...")
-            //console.log("I have been unable find my target " + ++couldNotFindObject + " times");
         } else {
-            robot.moveMouse(ore.x, ore.y);
-            robot.mouseClick();
+            moveAndClick(ore.x, ore.y);
             console.log(++oresFound + " " + ore.object + " have been located");
             sleep(15000);
         }
@@ -160,7 +184,7 @@ function findMotherloadOre() {
             var screen_x = random_x + x;
             var screen_y = random_y + y;
 
-            console.log("Found mob at: " + screen_x + ", " + screen_y);
+            console.log("Found ore at: " + screen_x + ", " + screen_y);
             return { x: screen_x, y: screen_y, object: "ores" };
         }
     }
@@ -169,28 +193,11 @@ function findMotherloadOre() {
 }
 
 function findSquare() {
-
     var mark_x = 300, mark_y = 300, mark_width = 1300, mark_height = 400
-
     var obstacle_x = 100, obstacle_y = 0, obstacle_width = 1820, obstacle_height = 900;
     
     var agility_obstacle_colors = ["e700ff", "ba00cd"];
-
     var mark_of_grace_overlay_color = ["0026ff", "001fcd", "0019a5"]
-
-    // Using actual mark of grace colors
-    var mark_of_grace_colors = [
-        "ae920b",
-        "a0870a",
-        "a78c0b", 
-        "a4880a", 
-        "867109", 
-        "8c7409", 
-        "7e6a08", 
-        "685806", 
-        "715e07", 
-        "6a5906"
-    ];
 
     var img = robot.screen.capture(obstacle_x, obstacle_y, obstacle_width, obstacle_height);
 
@@ -225,129 +232,18 @@ function findSquare() {
     return false;
 }
 
-function treeGnomeStrongholdAgilityTraining() {
-    
-    var sleepTime = 6000;
-
-    // log
-    robot.moveMouse(939, 483);
-    robot.mouseClick();
-
-    sleep(sleepTime);
-
-    // cargo net box
-    robot.moveMouse(955,401);
-    robot.mouseClick();
-
-    sleep(sleepTime);
-
-    // pole
-    robot.moveMouse(945,487);
-    robot.mouseClick();
-
-    sleep(sleepTime);
-
-    // rope bridge
-    robot.moveMouse(787,529);
-    robot.mouseClick();
-
-    sleep(7000);
-
-    // down the tree
-    robot.moveMouse(850,490);
-    robot.mouseClick();
-
-    sleep(sleepTime);
-
-    // over cargo net
-    robot.moveMouse(977,735);
-    robot.mouseClick();
-
-    sleep(sleepTime);
-
-    // pipe
-    robot.moveMouse(982,628);
-    robot.mouseClick();
-
-    sleep(9000);
-
-    // back to the start
-    robot.moveMouse(1247,475);
-    robot.mouseClick();
-}
-
-function singleCrabNearAltar() {
-    // wait 11 mins
-    sleep(660000);
-
-    robot.moveMouse(370,448);
-    robot.mouseClick();
-
-    sleep(14000);
-
-    robot.moveMouse(356,507);
-    robot.mouseClick();
-
-    sleep(14000)
-
-    robot.moveMouse(1633,591);
-    robot.mouseClick();
-
-    sleep(14000);
-
-    robot.moveMouse(1455,600);
-    robot.mouseClick();
-}
-
-function doubleCrabNearWCGuild() {
-    // wait 11 mins
-    sleep(660000);
-
-    robot.moveMouse(1421,255);
-    robot.mouseClick();
-
-    sleep(11000);
-
-    robot.moveMouse(1107,189);
-    robot.mouseClick();
-
-    sleep(11000);
-
-    robot.moveMouse(705,999)
-    robot.mouseClick();
-
-    sleep(11000);
-
-    robot.moveMouse(567,951);
-    robot.mouseClick();
-
-    sleep(11000);
-
-    robot.moveMouse(540,725);
-    robot.mouseClick();
-}
-
 function fourCrabBottomLeft() {
-    // wait 11 mins
-    sleep(660000)
+    let crabSleep = 11000; // 11 sec
 
-    robot.moveMouse(1656,535);
-    robot.mouseClick();
+    sleep(660000) // 11 min
 
-    sleep(11000);
-
-    robot.moveMouse(1670,626);
-    robot.mouseClick();
-
-    sleep(11000)
-
-    robot.moveMouse(210,471);
-    robot.mouseClick();
-
-    sleep(11000);
-
-    robot.moveMouse(305,510);
-    robot.mouseClick();
+    moveAndClick(1656, 535);
+    sleep(crabSleep);
+    moveAndClick(1670,626);
+    sleep(crabSleep)
+    moveAndClick(210,471);
+    sleep(crabSleep);
+    moveAndClick(305,510);
 }
 
 function useInventory(position) {
@@ -382,8 +278,7 @@ function useInventory(position) {
         { x: 1826, y: 984}
     ]
 
-    robot.moveMouse(inventoryCoordinates[position].x, inventoryCoordinates[position].y);
-    robot.mouseClick();
+    moveAndClick(inventoryCoordinates[position].x, inventoryCoordinates[position].y);
 }
 
 function useBank(position) {
@@ -391,8 +286,7 @@ function useBank(position) {
         { x: 646 , y: 143 }
     ]
 
-    robot.moveMouse(bankCoordinates[position].x, bankCoordinates[position].y);
-    robot.mouseClick();
+    moveAndClick(bankCoordinates[position].x, bankCoordinates[position].y);
 }
 
 function closeBank() {
