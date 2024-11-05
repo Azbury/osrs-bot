@@ -144,14 +144,27 @@ function motherloadMine() {
 }
 
 function magicTrees() {
-    console.log("test");
+    let treesFound = 0;
+
+    while(true) {
+        let tree = findMob();
+
+        if (tree === false) {
+            console.log("Searching...")
+        } else {
+            moveAndClick(tree.x, tree.y);
+            console.log(++treesFound + " " + tree.object + " have been located");
+            sleep(120000);
+        }
+    }
 }
 
 function findMob() {
     var x = 300, y = 300, width = 1300, height = 400;
     var img = robot.screen.capture(x, y, width, height);
     
-    var mob_color = "ff0000";
+    // var mob_color = "ff0000"; // red color
+    var mob_color = "000000" // tree tile color
 
     for (var i = 0; i < 100; i++) {
         var random_x = getRandomInt(0, width - 1);
