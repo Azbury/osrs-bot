@@ -12,6 +12,7 @@ const options = yargs
   .option("crab", { describe: "Farm crabs" })
   .option("craft", { describe: "Crafting gems" })
   .option("fire", { describe: "Make fires" })
+  .option("magictrees", { describe: "Farm magic trees"})
   .option("mob", { describe: "Attack mobs"})
   .option("motherload", { describe: "Motherload Mine"})
   .option("nmz", { describe: "Nightmare Zone" })
@@ -22,6 +23,7 @@ if (argv.agility) agility();
 if (argv.crab) farmCrabs();
 if (argv.craft) crafting();
 if (argv.fire) firemaking();
+if (argv.magictrees) magicTrees();
 if (argv.mob) attackMobs();
 if (argv.motherload) motherloadMine();
 if (argv.nmz) nightmareZone();
@@ -139,6 +141,10 @@ function motherloadMine() {
             sleep(15000);
         }
     }
+}
+
+function magicTrees() {
+    console.log("test");
 }
 
 function findMob() {
