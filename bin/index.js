@@ -31,6 +31,9 @@ if (argv.nmz) nightmareZone();
 function attackMobs() {
     let mobsFound = 0;
 
+    let prayerPotPosition = 0;
+    let prayerPotCount = 0;
+
     while(true) {
         let mob = findMob();
 
@@ -39,7 +42,12 @@ function attackMobs() {
         } else {
             moveAndClick(mob.x, mob.y);
             console.log(++mobsFound + " " + mob.object + " have been located");
-            sleep(5000);
+            sleep(25000);
+            if (mobsFound % 2 === 0) {
+                useInventory(prayerPotPosition)
+                if (++prayerPotCount % 4 === 0) prayerPotPosition++;
+            }
+            sleep(1000);
         }
     }
 }
@@ -163,8 +171,8 @@ function findMob() {
     var x = 300, y = 300, width = 1300, height = 400;
     var img = robot.screen.capture(x, y, width, height);
     
-    // var mob_color = "ff0000"; // red color
-    var mob_color = "000000" // tree tile color
+    var mob_color = "ff0000"; // red color
+    // var mob_color = "000000" // tree tile color
 
     for (var i = 0; i < 100; i++) {
         var random_x = getRandomInt(0, width - 1);
