@@ -155,15 +155,14 @@ function magicTrees() {
     let treesFound = 0;
 
     while(true) {
-        let tree = findMob();
-
-        if (tree === false) {
-            console.log("Searching...")
-        } else {
-            moveAndClick(tree.x, tree.y);
-            console.log(++treesFound + " " + tree.object + " have been located");
-            sleep(120000);
-        }
+        moveAndClick(614, 354);
+        sleep(270000); //4.5mins
+        moveAndClick(1314, 772);
+        sleep(6000); //3sec
+        useInventory(0);
+        sleep(3000); //3secs
+        closeBank();
+        sleep(120000); //2mins
     }
 }
 
