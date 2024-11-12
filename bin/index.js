@@ -169,7 +169,7 @@ function magicTrees() {
         } else {
             moveAndClick(tree2XCord, tree2YCord);
         }
-        sleep(6000) //6sec
+        sleep(7000) //7sec
         useSpecialAttack();
         sleep(270000); //4.5mins
         // click bank
