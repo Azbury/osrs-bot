@@ -327,6 +327,10 @@ function closeBank() {
     moveAndClick(1043, 66);
 }
 
+function useSpecialAttack() {
+    moveAndClick(1750, 176);
+}
+
 function moveAndClick(x, y) {
     robot.moveMouse(x, y);
     robot.mouseClick();
