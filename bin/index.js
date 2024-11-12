@@ -164,12 +164,15 @@ function magicTrees() {
         } else {
             moveAndClick(tree2XCord, tree2YCord);
         }
+        sleep(6000) //6sec
+        useSpecialAttack();
         sleep(270000); //4.5mins
         moveAndClick(1314, 772);
-        sleep(6000); //3sec
+        sleep(6000); //6sec
         useInventory(0);
         sleep(3000); //3secs
         closeBank();
+        sleep(3000); //3secs
         console.log(++treesFound + " trees have been farmed");
     }
 }
