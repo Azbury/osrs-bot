@@ -153,16 +153,24 @@ function motherloadMine() {
 
 function magicTrees() {
     let treesFound = 0;
+    let tree1XCord = 614;
+    let tree1YCord = 354;
+    let tree2XCord = 610;
+    let tree2YCord = 246;
 
     while(true) {
-        moveAndClick(614, 354);
+        if (treesFound % 2 === 0) {
+            moveAndClick(tree1XCord, tree1YCord);
+        } else {
+            moveAndClick(tree2XCord, tree2YCord);
+        }
         sleep(270000); //4.5mins
         moveAndClick(1314, 772);
         sleep(6000); //3sec
         useInventory(0);
         sleep(3000); //3secs
         closeBank();
-        sleep(120000); //2mins
+        console.log(++treesFound + " trees have been farmed");
     }
 }
 
