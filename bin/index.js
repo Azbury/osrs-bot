@@ -157,8 +157,13 @@ function magicTrees() {
     let tree1YCord = 354;
     let tree2XCord = 610;
     let tree2YCord = 246;
+    let bank1XCord = 1314;
+    let bank1YCord = 772;
+    let bank2XCord = 1384;
+    let bank2YCord = 857;
 
     while(true) {
+        // click tree
         if (treesFound % 2 === 0) {
             moveAndClick(tree1XCord, tree1YCord);
         } else {
@@ -167,7 +172,12 @@ function magicTrees() {
         sleep(6000) //6sec
         useSpecialAttack();
         sleep(270000); //4.5mins
-        moveAndClick(1314, 772);
+        // click bank
+        if (treesFound % 2 === 0) {
+            moveAndClick(bank1XCord, bank1YCord);
+        } else {
+            moveAndClick(bank2XCord, bank2YCord);
+        }
         sleep(6000); //6sec
         useInventory(0);
         sleep(3000); //3secs
